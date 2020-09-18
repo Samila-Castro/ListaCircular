@@ -100,6 +100,66 @@ int pop(ListaCircular *lista, int chave)
     return -1;
 }
 
+int Find(ListaCircular* lista, int valor)
+{
+
+    if (!isEmpty(lista))
+    {
+
+        int position = 1;
+        No *alvo = lista->inicio;
+
+
+        do
+        {
+            if(alvo->valor == valor)
+            {
+                return position;
+            }
+            position++;
+            alvo = alvo->proximo;
+        }
+        while(alvo != lista->inicio);
+
+    }
+    return -1;
+
+}
+
+void Clear(ListaCircular* lista)
+{
+
+    if (!isEmpty(lista))
+    {
+
+        No *alvo = lista->inicio;
+
+        if(lista->tamanho == 1)
+        {
+            free(alvo);
+        }
+        else
+        {
+            do
+            {
+                No *aux = alvo->proximo;
+                free(alvo);
+                alvo = aux;
+            }
+            while(alvo != lista->fim);
+
+            free(lista->fim);
+        }
+
+        lista->inicio = NULL;
+        lista->fim = NULL;
+        lista->tamanho = 0;
+    }
+    return -1;
+
+}
+
+
 int isEmpty(ListaCircular* lista)
 {
     return lista->tamanho <= 0;
@@ -128,3 +188,13 @@ void printListaEncadeada(ListaCircular* lista)
 
 }
 
+int Size(ListaCircular* lista)
+{
+
+    if(lista != NULL)
+    {
+        return (lista->tamanho);
+    }
+
+
+}
